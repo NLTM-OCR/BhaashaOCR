@@ -1,7 +1,7 @@
 # Printed End-to-End Page Recognition for Indic Languages
 
 ## Pretrained Models:
-- You can find the pretrained model for End-to-End Recognition under the [Assests]().
+- You can find the pretrained model for End-to-End Recognition under the [Assests](https://github.com/NLTM-OCR/BhaashaOCR/releases).
 
 ## Setup
 - Using Python = 3.10+
