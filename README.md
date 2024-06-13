@@ -23,7 +23,8 @@ For Inference please call the `infer.py` file. The Page level OCR/Layout outputs
 python infer.py \
   --pretrained=/home/ocr/bengali \
   --image_path=/home/ocr/image.jpg \
-  --language=bengali --out_dir=/home/ocr/out
+  --out_dir=/home/ocr/out \
+  --language=bengali
 ```
 
 ## Contact
