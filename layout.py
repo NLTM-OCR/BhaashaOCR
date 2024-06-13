@@ -32,7 +32,7 @@ def crop_words(image_path, layout_file, word_folder):
     with open(layout_file, 'r') as f:
         a = f.read().strip().split('\n')
     a = [list(map(int, i.strip(' ,').split(','))) for i in a]
-    a = [i for i in a if len(i) >= 4]
+    a = [i for i in a if len(i) == 5]
     img = Image.open(image_path).convert('RGB')
     for idx,i in enumerate(a):
         img.crop((
@@ -56,7 +56,7 @@ def process(image_path, output, PREDICTOR_V2):
                 regions.append(
                     ','.join(list(map(str, convert_geometry_to_bbox(word.geometry, dim, padding=5, line=i+1)))),
                 )
-        outfile = join(output, splitext(basename(image_path))[0]+'.txt')
+        outfile = join(output, 'layout.txt')
         with open(outfile, 'w', encoding='utf-8') as f:
             f.write('\n'.join(regions))
         word_folder = join(output, 'words')

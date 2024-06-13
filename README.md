@@ -1,10 +1,7 @@
 # Printed End-to-End Page Recognition for Indic Languages
 
-## Pretrained Layout Models:
-- You can find the pretrained model for the DocTR Layout under the [Assests]().
-
-## Pretrained OCR Models:
-- You can find the pretrained models for V4 printed for 13 languages under the [Assets]().
+## Pretrained Models:
+- You can find the pretrained model for End-to-End Recognition under the [Assests]().
 
 ## Setup
 - Using Python = 3.10+
@@ -15,8 +12,7 @@
 For Inference please call the `infer.py` file. The OCR outputs are generated in JSON file and saved in the directory specified by `out_dir` argument.
 
 ### Arguments
-* `--layout_pretrained`: Path to Layout pretrained model file (.pt)
-* `--ocr_pretrained`: Path to OCR pretrained model file (.pth)
+* `--pretrained`: Path to pretrained folder containing layout/ocr model files (as unzipped from the Assets downloads)
 * `--image_path`: Path to the input image for Inference
 * `--out_dir`: Path to folder where JSON OCR output is saved.
 * `--language`: language of the input images
@@ -25,8 +21,7 @@ For Inference please call the `infer.py` file. The OCR outputs are generated in 
 
 ```bash
 python infer.py \
-  --layout_pretrained=/home/ocr/layout_model.pt \
-  --ocr_pretrained=/home/ocr/model/best_cer.pth \
+  --pretrained=/home/ocr/bengali \
   --image_path=/home/ocr/image.jpg \
   --language=bengali --out_dir=/home/ocr/out
 ```
