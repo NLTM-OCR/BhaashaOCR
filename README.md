@@ -9,7 +9,7 @@
 
 ## Inference (New)
 
-For Inference please call the `infer.py` file. The OCR outputs are generated in JSON file and saved in the directory specified by `out_dir` argument.
+For Inference please call the `infer.py` file. The Page level OCR/Layout outputs are generated in txt file format (ocr.txt & layout.txt) and saved in the directory specified by `out_dir` argument.
 
 ### Arguments
 * `--pretrained`: Path to pretrained folder containing layout/ocr model files (as unzipped from the Assets downloads)
