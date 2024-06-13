@@ -15,7 +15,6 @@ For Inference please call the `infer.py` file. The Page level OCR/Layout outputs
 * `--pretrained`: Path to pretrained folder containing layout/ocr model files (as unzipped from the Assets downloads)
 * `--image_path`: Path to the input image for Inference
 * `--out_dir`: Path to folder where JSON OCR output is saved.
-* `--language`: language of the input images
 
 ### Example
 
@@ -23,8 +22,7 @@ For Inference please call the `infer.py` file. The Page level OCR/Layout outputs
 python infer.py \
   --pretrained=/home/ocr/bengali \
   --image_path=/home/ocr/image.jpg \
-  --out_dir=/home/ocr/out \
-  --language=bengali
+  --out_dir=/home/ocr/out
 ```
 
 ## Contact

@@ -186,7 +186,7 @@ if __name__ == "__main__":
     parser.add_argument('--image_path', help='path to the page image')
     parser.add_argument('--pretrained', default='', help="path to pretrained folder containing layout and ocr models")
     parser.add_argument('--out_dir', type=str, default="out", help='path to the output folder')
-    parser.add_argument('--language', help='Language of inference model to be called')
+    # parser.add_argument('--language', help='Language of inference model to be called')
 
     parser.add_argument('--cuda', default=True, action='store_true', help='enables cuda')
     parser.add_argument('--gpu_id', type=str, default='0', help='gpu device ids')
@@ -196,7 +196,8 @@ if __name__ == "__main__":
 
     opt.ocr_pretrained = join(opt.pretrained, 'ocr.pth')
     opt.layout_pretrained = join(opt.pretrained, 'layout.pt')
-    opt.alphabet = f'alphabet/{opt.language}_lexicon.txt'
+    # opt.alphabet = f'alphabet/{opt.language}_lexicon.txt'
+    opt.alphabet = join(opt.pretrained, 'lexicon.txt')
     if not os.path.exists(opt.layout_pretrained):
         print(f'Layout model not found at: {opt.layout_pretrained}')
         exit(1)
@@ -204,7 +205,7 @@ if __name__ == "__main__":
         print(f'OCR model not found at: {opt.ocr_pretrained}')
         exit(1)
     if not os.path.exists(opt.alphabet):
-        print(f'Vocabulary not found at: {opt.alphabet}')
+        print(f'Lexicon not found at: {opt.alphabet}')
         exit(1)
 
     opt.test_root = layout_main(opt.image_path, opt.layout_pretrained, opt.out_dir)
