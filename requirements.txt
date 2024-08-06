@@ -8,3 +8,4 @@ torchvision==0.14.1
 six==1.16.0
 python-doctr[torch]
 tqdm
+pytesseract==0.3.10

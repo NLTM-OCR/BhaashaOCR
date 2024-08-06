@@ -1,9 +1,9 @@
 from __future__ import division, print_function
 
 import argparse
-import random
 import json
 import os
+import random
 from os.path import join
 
 import numpy as np
@@ -17,8 +17,8 @@ import datasets.dataset as dataset
 import utils
 from datasets.ae_transforms import *
 from datasets.imprint_dataset import Rescale as IRescale
-from models.model import ModelBuilder
 from layout import main as layout_main
+from models.model import ModelBuilder
 
 random.seed(1234)
 np.random.seed(1234)
@@ -150,7 +150,7 @@ def combine_ocr_output(opt):
         ocr = list(ocr.items())
         try:
             ocr = sorted(ocr, key=lambda x:int(x[0].split('.')[0]))
-        except:
+        except Exception:
             ocr.sort()
     with open(join(opt.out_dir, 'layout.txt'), 'r') as f:
         layout = f.read().strip().split('\n')
@@ -195,11 +195,11 @@ if __name__ == "__main__":
     opt = parser.parse_args()
 
     opt.ocr_pretrained = join(opt.pretrained, 'ocr.pth')
-    opt.layout_pretrained = join(opt.pretrained, 'layout.pt')
+    # opt.layout_pretrained = join(opt.pretrained, 'layout.pt')
     # opt.alphabet = f'alphabet/{opt.language}_lexicon.txt'
     opt.alphabet = join(opt.pretrained, 'lexicon.txt')
-    if not os.path.exists(opt.layout_pretrained):
-        print(f'Layout model not found at: {opt.layout_pretrained}')
+    if not os.path.exists(join(opt.pretrained, 'layout1.traineddata')):
+        print(f'No Layout model file found at: {opt.pretrained}')
         exit(1)
     if not os.path.exists(opt.ocr_pretrained):
         print(f'OCR model not found at: {opt.ocr_pretrained}')
@@ -208,6 +208,6 @@ if __name__ == "__main__":
         print(f'Lexicon not found at: {opt.alphabet}')
         exit(1)
 
-    opt.test_root = layout_main(opt.image_path, opt.layout_pretrained, opt.out_dir)
+    opt.test_root = layout_main(opt.image_path, opt.pretrained, opt.out_dir)
     obj = BaseHTR(opt)
     combine_ocr_output(opt)
