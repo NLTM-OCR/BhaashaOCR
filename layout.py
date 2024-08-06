@@ -27,7 +27,9 @@ def main(image_path, pretrained, output):
         results = pytesseract.image_to_data(
             image_path,
             output_type=pytesseract.Output.DICT,
-            lang='layout1+layout2+layout3'
+            # Using multiple layout traineddata files for processing.
+            # If a particular layout file is not present, it will be ignored
+            lang='layout1+layout2+layout3+layout4'
         )
 
         regions = []
