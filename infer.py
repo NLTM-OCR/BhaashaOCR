@@ -184,7 +184,6 @@ if __name__ == "__main__":
     parser.add_argument('--image_path', help='path to the page image')
     parser.add_argument('--pretrained', default='', help="path to pretrained folder containing layout and ocr models")
     parser.add_argument('--out_dir', type=str, default="out", help='path to the output folder')
-    # parser.add_argument('--language', help='Language of inference model to be called')
 
     parser.add_argument('--cuda', default=True, action='store_true', help='enables cuda')
     parser.add_argument('--gpu_id', type=str, default='0', help='gpu device ids')
@@ -193,8 +192,6 @@ if __name__ == "__main__":
     opt = parser.parse_args()
 
     opt.ocr_pretrained = join(opt.pretrained, 'ocr.pth')
-    # opt.layout_pretrained = join(opt.pretrained, 'layout.pt')
-    # opt.alphabet = f'alphabet/{opt.language}_lexicon.txt'
     opt.alphabet = join(opt.pretrained, 'lexicon.txt')
     if not os.path.exists(join(opt.pretrained, 'layout1.traineddata')):
         print(f'No Layout model file found at: {opt.pretrained}')
