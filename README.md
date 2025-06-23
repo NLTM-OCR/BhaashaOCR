@@ -15,7 +15,7 @@ For Inference please call the `infer.py` file. The Page level OCR/Layout outputs
 ### Arguments
 * `--pretrained`: Path to pretrained folder containing layout/ocr model files (as unzipped from the Assets downloads)
 * `--image_path`: Path to the input image for Inference
-* `--out_dir`: Path to folder where JSON OCR output is saved.
+* `--out_dir`: Path to folder where OCR output is saved.
 
 ### Example
 
@@ -24,6 +24,26 @@ python infer.py \
   --pretrained=/home/ocr/bengali \
   --image_path=/home/ocr/image.jpg \
   --out_dir=/home/ocr/out
+```
+
+## Docker Example
+
+As Dockerfile uses **[uv](https://docs.astral.sh/uv/)** for managing the package so you can build and run the docker container using the following commands.
+
+```bash
+docker build -t bhaashaocr .
+docker run -d --rm --gpus all \
+	--name bhaashaocr-container
+	-v <path_to_model_folder>:/model:ro \
+	-v <path_to_folder_containing_input_output>:/data \
+	bhaashaocr \
+	uv python infer.py \
+	--pretrained /model \
+	# specify the actual path for input image and output dir
+	--image_path /data/image.jpg \
+	--out_dir /data/output
+# This will run the OCR docker container in background (-d), to see the detailed logs use the following command.
+docker logs -f bhaashaocr-container
 ```
 
 ## Contact
