@@ -1,0 +1,16 @@
+[project]
+name = "bhaashaocr"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "lmdb>=1.6.2",
+    "opencv-python>=4.11.0.86",
+    "pytesseract>=0.3.13",
+    "scikit-image>=0.25.2",
+    "six>=1.17.0",
+    "torchvision>=0.22.1",
+    "tqdm>=4.67.1",
+    "ultralytics>=8.3.158",
+]
