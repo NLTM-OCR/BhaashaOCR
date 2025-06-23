@@ -5,19 +5,7 @@ import pytesseract
 from PIL import Image
 
 
-def crop_words(image_path, layout_file, word_folder):
-    with open(layout_file, 'r') as f:
-        a = f.read().strip().split('\n')
-    a = [list(map(int, i.strip(' ,').split(','))) for i in a]
-    a = [i for i in a if len(i) == 5]
-    img = Image.open(image_path).convert('RGB')
-    for idx,i in enumerate(a):
-        img.crop((
-            i[0], i[1],
-            i[0]+i[2], i[1]+i[3]
-        )).save(join(word_folder, f'{idx}.jpg'))
-
-def main(image_path, pretrained, output):
+def perform_openseg(image_path, pretrained) -> list[str]:
     try:
         if os.path.exists(pretrained) and os.path.isdir(pretrained):
             os.environ['TESSDATA_PREFIX'] = pretrained
@@ -48,13 +36,7 @@ def main(image_path, pretrained, output):
                 x, y, w, h,
                 results['line_num'][i] + 1,
             ]))))
-        outfile = join(output, 'layout.txt')
-        with open(outfile, 'w', encoding='utf-8') as f:
-            f.write('\n'.join(regions))
-        word_folder = join(output, 'words')
-        if not os.path.exists(word_folder):
-            os.makedirs(word_folder)
-        crop_words(image_path, outfile, word_folder)
-        return word_folder
+        return regions
     except Exception as e:
         print(f"Error processing file {image_path}: {e}")
+        return []

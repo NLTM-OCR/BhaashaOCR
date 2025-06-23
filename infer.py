@@ -10,14 +10,13 @@ import numpy as np
 import torch
 import torch.backends.cudnn as cudnn
 import torch.nn.functional as F
-import torch.utils.data
 from torchvision.transforms import Compose
 
 import datasets.dataset as dataset
 import utils
 from datasets.ae_transforms import *
 from datasets.imprint_dataset import Rescale as IRescale
-from layout import main as layout_main
+from layout import layout_main
 from models.model import ModelBuilder
 
 random.seed(1234)
@@ -71,7 +70,7 @@ class BaseHTR(object):
             self.nclass,
             STN_type='TPS',
             nheads=1,
-            stn_attn=None,
+            stn_attn=None, # type: ignore
             use_loc_bn=False,
             loc_block = 'LocNet',
             CNN='ResCRNN'
@@ -102,9 +101,8 @@ class BaseHTR(object):
         gts = []
         decoded_preds = []
         val_iter = iter(data_loader)
-        max_iter = min(np.inf, len(data_loader))
         with torch.no_grad():
-            for i in range(max_iter):
+            for _ in range(len(data_loader)):
                 cpu_images, cpu_texts = next(val_iter)
                 utils.loadData(self.image, cpu_images)
                 output_dict = self.model(self.image)
