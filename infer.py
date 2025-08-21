@@ -141,6 +141,42 @@ class BaseHTR(object):
             self.text = self.text.cuda()
             self.length = self.length.cuda()
 
+def create_json(layout: list[list[int]], ocr: list[str]):
+    ret = {}
+    regions = []
+    lines = []
+    current_line = []
+    for idx, i, j in enumerate(zip(layout, ocr)):
+        regions.append({
+            'bounding_box': {
+                'x': i[0],
+                'y': i[1],
+                'w': i[2],
+                'h': i[3],
+            },
+            'label': j.strip(),
+            'line': i[4],
+            'text': '',
+            'confidence': 0,
+            'order': idx+1,
+            'attributes': {},
+        })
+    for i in range(len(regions)):
+        if i == 0:
+            current_line.append(regions[i]['label'])
+        else:
+            if regions[i]['line'] == regions[i-1]['line']:
+                current_line.append(regions[i]['label'])
+            else:
+                lines.append(' '.join(current_line))
+                current_line = [regions[i]['label']]
+    if current_line:
+        lines.append(' '.join(current_line))
+    lines = [i.strip() for i in lines]
+    ret['text'] = '\n'.join(lines)
+    ret['regions'] = ret.copy()
+    return ret
+
 
 def combine_ocr_output(opt):
     with open(join(opt.out_dir, 'out.json'), 'r', encoding='utf-8') as f:
@@ -173,6 +209,8 @@ def combine_ocr_output(opt):
     ret = [i[1] for i in ret]
     with open(join(opt.out_dir, 'ocr.txt'), 'w', encoding='utf-8') as f:
         f.write('\n'.join(ret))
+    with open(join(opt.out_dir, 'result.json'), 'w', encoding='utf-8') as f:
+        f.write(json.dumps(create_json(layout, ret), indent=4))
     os.system('rm -rf {} && rm -rf {}'.format(
         join(opt.out_dir, 'out.json'),
         join(opt.out_dir, 'words')

@@ -6,3 +6,4 @@ six>=1.17.0
 torchvision>=0.22.1
 tqdm>=4.67.1
 ultralytics>=8.3.158
+fastapi[standard]

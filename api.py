@@ -44,8 +44,8 @@ async def pageocr_api(
         # "-v", f"{MODEL_DIR}:/model:ro",
         # "-v", f"{work_dir}:/data",
         # DOCKER_IMAGE,
-        "uv", "python", "infer.py",
-        "--pretrained", "/model",
+        "python", "infer.py",
+        "--pretrained", f"{MODEL_DIR}",
         "--image_path", f"{input_image_path}",
         "--out_dir", f"{output_dir}",
     ]
