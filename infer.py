@@ -146,7 +146,7 @@ def create_json(layout: list[list[int]], ocr: list[str]):
     regions = []
     lines = []
     current_line = []
-    for idx, i, j in enumerate(zip(layout, ocr)):
+    for idx, (i, j) in enumerate(zip(layout, ocr)):
         regions.append({
             'bounding_box': {
                 'x': i[0],
