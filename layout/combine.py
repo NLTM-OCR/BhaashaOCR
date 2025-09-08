@@ -577,12 +577,12 @@ def merge_v5(data1, data2):
 
 def merge_layouts(openseg_regions, ajoy_regions) -> list[str]:
     ajoy_data = [{
-        "image_name": "v4x.jpg",
+        "image_name": "image.jpg",
         # "regions": [i.dict() for i in ajoy_regions]
         "regions": ajoy_regions
     }]
     openseg_data = [{
-        "image_name": "openseg.jpg",
+        "image_name": "image.jpg",
         # "regions": [i.dict() for i in openseg_regions]
         "regions": openseg_regions
     }]

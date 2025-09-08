@@ -1,6 +1,6 @@
 [project]
 name = "BhaashaOCR"
-version = "11.0"
+version = "12.0"
 description = "Indian language OCR"
 readme = "README.md"
 requires-python = ">=3.10"

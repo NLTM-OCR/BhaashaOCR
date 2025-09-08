@@ -11,4 +11,6 @@ RUN apt update && apt install -y --no-install-recommends \
 	ffmpeg tesseract-ocr \
 	&& rm -rf /var/lib/apt/lists/*
 
+RUN uv pip install fastapi uvicorn python-multipart
+
 COPY . .
