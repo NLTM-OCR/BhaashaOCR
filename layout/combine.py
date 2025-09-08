@@ -575,7 +575,7 @@ def merge_v5(data1, data2):
 
 # ------------------ Entry point ------------------# ------------------ Entry point ------------------
 
-def merge_layouts(ajoy_regions, openseg_regions) -> list[str]:
+def merge_layouts(openseg_regions, ajoy_regions) -> list[str]:
     ajoy_data = [{
         "image_name": "v4x.jpg",
         # "regions": [i.dict() for i in ajoy_regions]

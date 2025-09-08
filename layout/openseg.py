@@ -29,7 +29,7 @@ def perform_openseg(image_path, pretrained) -> list[str]:
             y = results['top'][i]
             w = results['width'][i]
             h = results['height'][i]
-            if h < 10:
+            if h < 10 or w < 3:
                 # Skipping box as height is too low.
                 continue
             regions.append(','.join(list(map(str, [
