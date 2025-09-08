@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse
 
 app = FastAPI()
 
-MODEL_DIR = "/models"   # Mounted model path (same as in docker run)
+MODEL_DIR = "/model"   # Mounted model path (same as in docker run)
 DATA_BASE_DIR = "/tmp/bhaashaocr"  # Local tmp directory for inputs/outputs
 os.makedirs(DATA_BASE_DIR, exist_ok=True)  # Ensure base directory exists
 DOCKER_IMAGE = "bhaashaocr"  # Docker image name
@@ -44,7 +44,7 @@ async def pageocr_api(
         # "-v", f"{MODEL_DIR}:/model:ro",
         # "-v", f"{work_dir}:/data",
         # DOCKER_IMAGE,
-        "python", "infer.py",
+        "/app/.venv/bin/python", "infer.py",
         "--pretrained", f"{MODEL_DIR}",
         "--image_path", f"{input_image_path}",
         "--out_dir", f"{output_dir}",

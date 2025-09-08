@@ -174,7 +174,7 @@ def create_json(layout: list[list[int]], ocr: list[str]):
         lines.append(' '.join(current_line))
     lines = [i.strip() for i in lines]
     ret['text'] = '\n'.join(lines)
-    ret['regions'] = ret.copy()
+    ret['regions'] = regions.copy()
     return ret
 
 
@@ -210,7 +210,7 @@ def combine_ocr_output(opt):
     with open(join(opt.out_dir, 'ocr.txt'), 'w', encoding='utf-8') as f:
         f.write('\n'.join(ret))
     with open(join(opt.out_dir, 'result.json'), 'w', encoding='utf-8') as f:
-        f.write(json.dumps(create_json(layout, ret), indent=4))
+        f.write(json.dumps(create_json(layout, [i[1] for i in ocr]), indent=4))
     os.system('rm -rf {} && rm -rf {}'.format(
         join(opt.out_dir, 'out.json'),
         join(opt.out_dir, 'words')
